@@ -13,7 +13,7 @@ export default function Cruisers({ cruisers }: {cruisers: ICruiser[][]}) {
       </div>
       <div className='bg-tertiary px-6 py-2'>
         {cruisers.map((_, index) =>
-          <span onClick={() => setPage(index)} className={`cursor-pointer mr-2 px-2 font-semibold ${page === index && 'bg-white rounded-full'}`}>
+          <span key={index} onClick={() => setPage(index)} className={`cursor-pointer mr-2 px-2 font-semibold ${page === index && 'bg-white rounded-full'}`}>
             { index + 1 }
           </span>
         )}

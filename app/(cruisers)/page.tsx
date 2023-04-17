@@ -29,7 +29,7 @@ interface ILine {
 async function getCruisers() {
   const data = await fetch(`${process.env.CRUISEBOUND_API_BASE}/sailings`);
   const response = await data.json();
-  const cruisers: ICruiser[][] = await response.results;
+  const cruisers: ICruiser[] = await response.results;
   return chunkArray(cruisers, 10);
 }
 

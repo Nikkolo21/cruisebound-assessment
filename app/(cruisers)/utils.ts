@@ -1,10 +1,14 @@
 export function chunkArray(arr: any[], chunkCount: number) {
-  const chunks = [];
-  while(arr.length) {
-    const chunkSize = Math.ceil(arr.length / chunkCount--);
-    const chunk = arr.slice(0, chunkSize);
-    chunks.push(chunk);
-    arr = arr.slice(chunkSize);
-  }
-  return chunks;
+  const result = arr.reduce((resultArray, item, index) => { 
+    const chunkIndex = Math.floor(index/chunkCount)
+  
+    if(!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = [] // start a new chunk
+    }
+  
+    resultArray[chunkIndex].push(item)
+  
+    return resultArray
+  }, [])
+  return result;
 }
