@@ -1,5 +1,6 @@
 import React from 'react';
-import Cruiser from './Cruiser';
+import Cruisers from './Cruisers';
+import { chunkArray } from './utils';
 
 export interface ICruiser {
   price: number
@@ -28,16 +29,14 @@ interface ILine {
 async function getCruisers() {
   const data = await fetch(`${process.env.CRUISEBOUND_API_BASE}/sailings`);
   const response = await data.json();
-  const cruisers: ICruiser[] = await response.results;
-  return cruisers;
+  const cruisers: ICruiser[][] = await response.results;
+  return chunkArray(cruisers, 10);
 }
 
 export default async function CruisersList() {
-  const cruisers = await getCruisers();
+  const cruisers: ICruiser[][] = await getCruisers();
 
   return (
-    <div className='max-w-4xl w-full mt-24'>
-      { cruisers.map((cruiser, index) => <Cruiser key={cruiser.name} index={index} data={cruiser}/>) }
-    </div>
+    <Cruisers cruisers={cruisers} />
   )
 }

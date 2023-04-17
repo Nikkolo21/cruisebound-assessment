@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 export default function cruiserLayout({children}: { children: React.ReactNode } ) {
   return (
-    <div className='flex justify-center'>{children}</div>
+    <div className='flex justify-center'>
+      {children}
+    </div>
   )
 }
