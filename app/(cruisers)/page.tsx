@@ -37,7 +37,7 @@ export default async function CruisersList() {
 
   return (
     <div className='max-w-4xl w-full mt-24'>
-      { cruisers.map(cruiser => <Cruiser key={cruiser.name} data={cruiser}/>) }
+      { cruisers.map((cruiser, index) => <Cruiser key={cruiser.name} index={index} data={cruiser}/>) }
     </div>
   )
 }
