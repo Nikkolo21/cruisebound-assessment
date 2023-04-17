@@ -39,7 +39,7 @@ export default function Cruiser({ data } : {data: ICruiser}) {
             <div className='mt-2 h-12 overflow-auto'>
               {
                 data.itinerary.map(it => (
-                  <span className='flex-inline'>{it} <span className='text-blue'>&#8594;</span> </span>
+                  <span key={it} className='flex-inline'>{it} <span className='text-blue'>&#8594;</span> </span>
                 ))
               }
             </div>
