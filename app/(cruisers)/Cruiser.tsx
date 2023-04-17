@@ -7,7 +7,7 @@ import { ICruiser } from './page';
 export default function Cruiser({ data, index } : {data: ICruiser, index: number}) {
   return (
     <div className='flex flex-col mb-12 rounded-xl shadow-lg overflow-hidden cursor-pointer w-full md:flex-row md:min-h-45'>
-      <div className={`w-full h-54 md:w-96 relative md:h-54 ${!data.ship.image && 'bg-darkerGray'}`}>
+      <div className={`w-full h-54 md:w-48 lg:w-96 relative md:h-54 ${!data.ship.image && 'bg-darkerGray'}`}>
         { data.ship.image && <Image alt={data.ship.name} src={data.ship.image} fill /> }
         <div className='absolute top-3 left-3 text-white px-2 py-1 text-sm rounded-sm' style={{backgroundColor: 'rgba(10, 10, 10, 0.8)'}}>{data.departureDate} - {data.returnDate}</div>
       </div>

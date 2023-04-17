@@ -3,7 +3,7 @@ export function chunkArray(arr: any[], chunkCount: number) {
     const chunkIndex = Math.floor(index/chunkCount)
   
     if(!resultArray[chunkIndex]) {
-      resultArray[chunkIndex] = [] // start a new chunk
+      resultArray[chunkIndex] = []
     }
   
     resultArray[chunkIndex].push(item)

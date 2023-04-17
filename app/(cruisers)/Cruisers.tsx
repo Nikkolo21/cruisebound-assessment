@@ -11,9 +11,9 @@ export default function Cruisers({ cruisers }: {cruisers: ICruiser[][]}) {
       <div>
         { cruisers[page].map((cruiser, index) => <Cruiser key={cruiser.name} index={index} data={cruiser}/>) }
       </div>
-      <div className='bg-tertiary px-6 py-2'>
+      <div className='bg-tertiary px-6 py-2 w-fit'>
         {cruisers.map((_, index) =>
-          <span key={index} onClick={() => setPage(index)} className={`cursor-pointer mr-2 px-2 font-semibold ${page === index && 'bg-white rounded-full'}`}>
+          <span key={index} onClick={() => setPage(index)} className={`cursor-pointer mx-1 px-2 font-semibold ${page === index && 'bg-white rounded-full'}`}>
             { index + 1 }
           </span>
         )}
