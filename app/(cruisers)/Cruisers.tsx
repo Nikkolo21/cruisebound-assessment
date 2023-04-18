@@ -14,14 +14,14 @@ export default function Cruisers({ cruisers }: { cruisers: IListedCruisers }) {
   useEffect(() => {
     setLocalCruisers(cruisers.dividedCruisers);
     sortCruiserList({cruisers: cruisers.allCruisers, option});
-  }, []);
+  }, [cruisers.allCruisers, cruisers.dividedCruisers, option]);
 
   useEffect(() => {
     setPage(0);
     setLocalCruisers(
       sortCruiserList({cruisers: cruisers.allCruisers, option})
     );
-  }, [option, setLocalCruisers, sortCruiserList]);
+  }, [option, setLocalCruisers, sortCruiserList, cruisers.allCruisers]);
 
   return (
     <div className='max-w-4xl w-full py-12'>
