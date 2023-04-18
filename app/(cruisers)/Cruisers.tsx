@@ -21,7 +21,7 @@ export default function Cruisers({ cruisers }: { cruisers: IListedCruisers }) {
     setLocalCruisers(
       sortCruiserList({cruisers: cruisers.allCruisers, option})
     );
-  }, [option, setLocalCruisers, sortCruiserList, cruisers.allCruisers]);
+  }, [option, setLocalCruisers, cruisers.allCruisers]);
 
   return (
     <div className='max-w-4xl w-full py-12'>
