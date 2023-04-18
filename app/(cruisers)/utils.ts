@@ -5,42 +5,49 @@ export const dropdownValues: {
   name: string;
   order: 'asc' | 'desc';
   key: 'price' | 'duration' | 'departureDate';
+  value: any;
 }[] = [
   {
     id: 0,
     name: 'Price',
     order: 'asc',
     key: 'price',
+    value: 0,
   },
   {
     id: 1,
     name: 'Price',
     order: 'desc',
     key: 'price',
+    value: 1,
   },
   {
     id: 2,
     name: 'Duration',
     order: 'asc',
     key: 'duration',
+    value: 2,
   },
   {
     id: 3,
     name: 'Duration',
     order: 'desc',
     key: 'duration',
+    value: 3,
   },
   {
     id: 4,
     name: 'Departure Date',
     order: 'asc',
     key: 'departureDate',
+    value: 4,
   },
   {
     id: 5,
     name: 'Departure Date',
     order: 'desc',
     key: 'departureDate',
+    value: 5,
   },
 ];
 

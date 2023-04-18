@@ -1,0 +1,63 @@
+'use client';
+import { dropdownValues } from '@/app/(cruisers)/utils';
+import React, { useEffect, useRef, useState } from 'react';
+
+export default function Dropdown({ onChange }: { onChange: Function }) {
+  const ref = useRef<any>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(0);
+
+  useEffect(() => {
+    const handleClickOutside = (event: Event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside, true);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true);
+    };
+  }, []);
+
+  function selectValue(value: any) {
+    onChange(value);
+    setSelectedValue(value);
+    setIsOpen(false);
+  }
+
+  return (
+    <div className='relative cursor-pointer' ref={ref}>
+      <button className='border border border-gray w-[145px] rounded-md' onClick={() => setIsOpen(true)}>
+        {
+          <div className='flex flex-col px-4 py-2 w-full text-ellipsis whitespace-nowrap overflow-hidden font-semibold'>
+            <div className='text-left'>
+              {dropdownValues[selectedValue].name}
+            </div>
+            <div className='text-left text-xs text-darkerGray'>
+              <span>{dropdownValues[selectedValue].order === 'asc' ? 'Lowest First': 'Highest First'}</span>
+            </div>
+          </div>
+        }
+      </button>
+      {
+        isOpen && (
+          <div className='absolute top-16 bg-white w-max z-10'>
+            {
+              dropdownValues.map(elem => (
+                <div
+                  key={elem.id}
+                  className='flex flex-col px-4 py-2 hover:bg-primary hover:text-white'
+                  onClick={() => selectValue(elem.value)}
+                >
+                  <div>{elem.name}</div>
+                  <small>{elem.order === 'asc' ? 'Lowest First': 'Highest First'}</small>
+                </div>
+              ))
+            }
+          </div>
+        )
+      }
+    </div>
+  )
+}

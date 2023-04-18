@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import Cruiser from './Cruiser';
 import Pagination from './Pagination';
-import { dropdownValues, sortCruiserList } from './utils';
+import { sortCruiserList } from './utils';
 import { ICruiser, IListedCruisers } from './page';
+import Dropdown from '../components/Dropdown';
 
 export default function Cruisers({ cruisers }: { cruisers: IListedCruisers }) {
   const [page, setPage] = useState(0);
@@ -25,20 +26,14 @@ export default function Cruisers({ cruisers }: { cruisers: IListedCruisers }) {
   return (
     <div className='max-w-4xl w-full py-12'>
       <div className='flex justify-end mb-12'>
-        <select name="cruisers" id="cruisers" onChange={e => setOption(+e.target.value)}>
-          {
-            dropdownValues.map(value => (
-              <option key={value.id} className='flex flex-col' value={value.id}>
-                <>{value.name} ({value.order === 'asc' ? 'Lowest First': 'Highest First'})</>
-              </option>
-            ))
-          }
-        </select>
+        <Dropdown onChange={(value: any) => setOption(value)} />
       </div>
       <div>
         {
-          localCruisers[page]?.map((cruiser: ICruiser, index: number) => <Cruiser key={`${index}-${cruiser.name}`} index={index} data={cruiser}/>)
-        }
+          localCruisers[page]?.map((
+          cruiser: ICruiser, index: number) =>
+            <Cruiser key={`${index}-${cruiser.name}`} index={index} data={cruiser}/>
+        )}
       </div>
       <Pagination onClick={setPage} page={page} cruisers={localCruisers} />
     </div>
