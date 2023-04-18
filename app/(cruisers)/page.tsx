@@ -26,15 +26,20 @@ interface ILine {
   name: string
 }
 
+export interface IListedCruisers {
+  allCruisers: ICruiser[];
+  dividedCruisers: ICruiser[][];
+}
+
 async function getCruisers() {
-  const data = await fetch(`${process.env.CRUISEBOUND_API_BASE}/sailings`);
+  const data = await fetch(`${process.env.CRUISEBOUND_API_BASE}/sailings`, { cache: 'no-store' });
   const response = await data.json();
-  const cruisers: ICruiser[] = await response.results;
-  return chunkArray(cruisers, 10);
+  const allCruisers: ICruiser[] = await response.results;
+  return { allCruisers, dividedCruisers: chunkArray(allCruisers, 10) };
 }
 
 export default async function CruisersList() {
-  const cruisers: ICruiser[][] = await getCruisers();
+  const cruisers: IListedCruisers = await getCruisers();
 
   return (
     <Cruisers cruisers={cruisers} />
