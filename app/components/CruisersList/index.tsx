@@ -6,10 +6,12 @@ import { sortCruiserList } from '@/app/utils';
 import Pagination from '../Pagination';
 import Dropdown from '../Dropdown';
 import CruiserCard from '../CruiserCard';
+import FilteredSection from '../FilteredSection';
 
 export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }) {
   const [page, setPage] = useState(0);
   const [option, setOption] = useState(0);
+  const isFiltered: boolean = useCruiserStore((state: ICruisersStore) => state.isFiltered);
   const setInitialCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setInitialCruisers);
   const setLocalCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setCruisers);
   const localCruisers: ICruiser[] = useCruiserStore((state: ICruisersStore) => state.cruisers);
@@ -32,7 +34,7 @@ export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }
   return (
     <div className='max-w-4xl w-full py-12'>
       <div className='flex justify-between mb-12'>
-        <div></div>
+        <div>{ isFiltered && <FilteredSection /> }</div>
         <Dropdown onChange={(value: any) => setOption(value)} />
       </div>
       <div>

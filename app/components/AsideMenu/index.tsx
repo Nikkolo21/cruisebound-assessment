@@ -1,16 +1,19 @@
 'use client';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import { ICruiser, ICruisersStore } from '@/app/utils/type';
 import { filterCruiserList } from '@/app/utils';
 import { useCruiserStore } from '@/app/store/cruisersStore';
 
 export default function AsideMenu() {
-  const [port, setPort] = useState("");
-  const [cruiseline, setCruiseline] = useState("");
+  const port: string = useCruiserStore((state: ICruisersStore) => state.port);
+  const setPort: Function = useCruiserStore((state: ICruisersStore) => state.setPort);
+  const cruiseline: string = useCruiserStore((state: ICruisersStore) => state.cruiseline);
+  const setCruiseline: Function = useCruiserStore((state: ICruisersStore) => state.setCruiseline);
   const setLocalCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setCruisers);
   const initialCruisers: ICruiser[] = useCruiserStore((state: ICruisersStore) => state.initialCruisers);
   const setLocalPaginatedCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setDividedCruisers);
+  const setIsFiltered: Function = useCruiserStore((state: ICruisersStore) => state.setIsFiltered);
 
   const getCruisers = useCallback((filter: 'port' | 'cruiseline', value: string) => {
     const result = filterCruiserList(filter, value, initialCruisers);
@@ -20,7 +23,10 @@ export default function AsideMenu() {
 
   useEffect(() => {
     let timer = setTimeout(() => {
-      port.length > 0 && getCruisers("port", port);
+      if(port.length > 0) {
+        getCruisers("port", port);
+        setIsFiltered(true);
+      }
     }, 500);
 
     return () => clearTimeout(timer);
@@ -28,7 +34,10 @@ export default function AsideMenu() {
   
   useEffect(() => {
     let timer = setTimeout(() => {
-      cruiseline.length > 0 && getCruisers("cruiseline", cruiseline);
+      if(cruiseline.length > 0) {
+        getCruisers("cruiseline", cruiseline);
+        setIsFiltered(true);
+      }
     }, 500);
 
     return () => clearTimeout(timer);
@@ -47,9 +56,9 @@ export default function AsideMenu() {
       <div className='flex flex-col justify-between h-full bg-secondary py-8 px-6'>
         <form>
           <label className='text-white'>Departure Port</label>
-          <input onChange={handlePort} name="port" className='mb-4 w-full h-10 rounded-md px-4 mt-1 mb-4' placeholder='Any Port'/>
+          <input onChange={handlePort} value={port} name="port" className='mb-4 w-full h-10 rounded-md px-4 mt-1 mb-4' placeholder='Any Port'/>
           <label className='text-white'>Cruiseline</label>
-          <input onChange={handleCruiseline} name="cruiseline" className='mb-4 w-full h-10 rounded-md px-4 mt-1' placeholder='Any Ship'/>
+          <input onChange={handleCruiseline} value={cruiseline} name="cruiseline" className='mb-4 w-full h-10 rounded-md px-4 mt-1' placeholder='Any Ship'/>
         </form>
         <Image className='my-0 mx-auto' alt="cruisebound" src="/cruise.svg" width={150} height={30} />
       </div>
