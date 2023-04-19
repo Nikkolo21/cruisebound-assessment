@@ -33,6 +33,7 @@ module.exports = {
       gray: '#BBBBBB',
       darkerGray: '#797979',
       blue: '#327FFE',
+      secondaryBlue: '#2F3747',
     }
   },
   plugins: [],

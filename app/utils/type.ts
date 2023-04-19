@@ -29,6 +29,7 @@ export interface IListedCruisers {
 
 export interface ICruisersStore {
   port: string;
+  page: number;
   cruiseline: string;
   dividedCruisers: ICruiser[][];
   cruisers: ICruiser[];
@@ -36,6 +37,7 @@ export interface ICruisersStore {
   setCruisers: Function;
   isFiltered: boolean;
   setPort: Function;
+  setPage: Function;
   setCruiseline: Function;
   setDividedCruisers: Function;
   setInitialCruisers: Function;

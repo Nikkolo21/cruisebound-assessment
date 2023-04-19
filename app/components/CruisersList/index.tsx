@@ -9,8 +9,9 @@ import CruiserCard from '../CruiserCard';
 import FilteredSection from '../FilteredSection';
 
 export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }) {
-  const [page, setPage] = useState(0);
   const [option, setOption] = useState(0);
+  const page: number = useCruiserStore((state: ICruisersStore) => state.page);
+  const setPage: Function = useCruiserStore((state: ICruisersStore) => state.setPage);
   const isFiltered: boolean = useCruiserStore((state: ICruisersStore) => state.isFiltered);
   const setInitialCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setInitialCruisers);
   const setLocalCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setCruisers);
@@ -44,7 +45,7 @@ export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }
             <CruiserCard key={`${index}-${cruiser.name}`} index={index} data={cruiser}/>
         )}
       </div>
-      <Pagination onClick={setPage} page={page} cruisers={localDividedCruisers} />
+      <Pagination cruisers={localDividedCruisers} />
     </div>
   )
 }
