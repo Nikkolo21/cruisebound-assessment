@@ -30,7 +30,7 @@ export default function AsideMenu() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [port, getCruisers])
+  }, [port, getCruisers, setIsFiltered])
   
   useEffect(() => {
     let timer = setTimeout(() => {
@@ -41,7 +41,7 @@ export default function AsideMenu() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [cruiseline, getCruisers])
+  }, [cruiseline, getCruisers, setIsFiltered])
 
   const handlePort = (e: any) => {
     setPort(e.target.value);
