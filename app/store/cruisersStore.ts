@@ -1,16 +1,7 @@
 import { create } from 'zustand';
-import { ICruiser } from '@/app/utils/type';
+import { ICruiser, ICruisersStore } from '@/app/utils/type';
 
-export interface ICruisers {
-  dividedCruisers: ICruiser[][];
-  cruisers: ICruiser[];
-  initialCruisers: ICruiser[];
-  setCruisers: Function;
-  setDividedCruisers: Function;
-  setInitialCruisers: Function;
-}
-
-export const useCruiserStore = create<ICruisers>((set) => ({
+export const useCruiserStore = create<ICruisersStore>((set) => ({
   dividedCruisers: [],
   cruisers: [],
   initialCruisers: [],

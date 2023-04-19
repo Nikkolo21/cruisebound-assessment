@@ -2,6 +2,7 @@
   "name": "cruisebound-assessment",
   "version": "0.1.0",
   "private": true,
+  "contributors": ["Luis Machillanda"],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
