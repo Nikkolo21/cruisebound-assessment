@@ -21,7 +21,6 @@ export default function AsideMenu() {
     const result = filterCruiserList(port, cruiseline, initialCruisers);
     setLocalCruisers(result.filteredCruisers);
     setLocalPaginatedCruisers(result.paginatedCruisers);
-    console.log({port, cruiseline});
   }, [initialCruisers, setLocalCruisers, setLocalPaginatedCruisers, port, cruiseline]);
 
   useEffect(() => {
