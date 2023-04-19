@@ -21,12 +21,13 @@ export default function AsideMenu() {
     const result = filterCruiserList(port, cruiseline, initialCruisers);
     setLocalCruisers(result.filteredCruisers);
     setLocalPaginatedCruisers(result.paginatedCruisers);
+    console.log({port, cruiseline});
   }, [initialCruisers, setLocalCruisers, setLocalPaginatedCruisers, port, cruiseline]);
 
   useEffect(() => {
     let timer = setTimeout(() => {
       getCruisers();
-      setIsFiltered(true);
+      setIsFiltered(!(port == '' && cruiseline == ''));
     }, 500);
 
     return () => clearTimeout(timer);
