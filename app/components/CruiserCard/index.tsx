@@ -8,7 +8,7 @@ export default function CruiserCard({ data, index } : {data: ICruiser, index: nu
   return (
     <div className='flex flex-col mb-12 rounded-xl shadow-lg overflow-hidden cursor-pointer w-full md:flex-row md:min-h-45'>
       <div className={`w-full h-54 md:w-48 lg:w-96 relative md:h-54 ${!data.ship.image && 'bg-darkerGray'}`}>
-        { data.ship.image && <Image alt={data.ship.name} src={data.ship.image} fill /> }
+        { data.ship.image && <Image className='h-[100%] w-[100%]' alt={data.ship.name} src={data.ship.image} width={500} height={230} /> }
         <div className='absolute top-3 left-3 text-white px-2 py-1 text-sm rounded-sm' style={{backgroundColor: 'rgba(10, 10, 10, 0.8)'}}>{data.departureDate} - {data.returnDate}</div>
       </div>
       <div className='flex flex-col justify-between w-full'>
