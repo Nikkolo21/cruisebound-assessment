@@ -30,16 +30,16 @@ export default function Dropdown({ onChange }: { onChange: Function }) {
 
   return (
     <div className='relative cursor-pointer' ref={ref}>
-      <button className='border border border-gray w-[140px] rounded-md' onClick={() => setIsOpen(true)}>
+      <button className='border border border-gray rounded-md flex' onClick={() => setIsOpen(true)}>
         <div className='flex flex-col px-3 pt-1 pb-2 w-full text-ellipsis whitespace-nowrap overflow-hidden font-semibold'>
           <div className='text-left flex justify-between'>
             {dropdownValues[selectedValue].name}
-            <FontAwesomeIcon className='mt-2' icon={faCaretDown} color="#797979" />
           </div>
           <div className='text-left text-xs text-darkerGray'>
             <span>{dropdownValues[selectedValue].order === 'asc' ? 'Lowest First': 'Highest First'}</span>
           </div>
         </div>
+        <FontAwesomeIcon className='mt-4 ml-2 mr-2' icon={faCaretDown} color="#797979" />
       </button>
       {
         isOpen && (
