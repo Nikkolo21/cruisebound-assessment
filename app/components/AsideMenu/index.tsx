@@ -31,7 +31,7 @@ export default function AsideMenu() {
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [getCruisers, setIsFiltered])
+  }, [getCruisers, setIsFiltered, cruiseline, port])
 
   const handlePort = (e: any) => {
     setPort(e.target.value);

@@ -30,7 +30,7 @@ export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }
     setLocalDividedCruisers(
       sortCruiserList({cruisers: localCruisers, option})
     );
-  }, [option, setLocalDividedCruisers, localCruisers]);
+  }, [option, setLocalDividedCruisers, localCruisers, setPage]);
 
   return (
     <div className='max-w-4xl w-full py-12'>
