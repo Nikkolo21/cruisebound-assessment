@@ -33,7 +33,7 @@ export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }
   }, [option, setLocalDividedCruisers, localCruisers, setPage]);
 
   return (
-    <div className='max-w-4xl w-full py-12'>
+    <div className='max-w-4xl w-full py-12 px-4'>
       <div className='flex justify-between mb-12'>
         <div>{ isFiltered && <FilteredSection /> }</div>
         { localDividedCruisers.length > 0 && <Dropdown onChange={(value: any) => setOption(value)} /> }
