@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { ICruiser } from './page';
+import { ICruiser } from '@/app/utils/type';
 
 export default function Pagination({
   onClick,

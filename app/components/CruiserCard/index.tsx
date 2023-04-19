@@ -1,10 +1,10 @@
-'use client'
 import React from 'react';
 import Image from 'next/image';
-import Button from '@/app/components/Button';
-import { ICruiser } from './page';
+import { ICruiser } from '@/app/utils/type';
+import Ports from './Ports';
+import Footer from './Footer';
 
-export default function Cruiser({ data, index } : {data: ICruiser, index: number}) {
+export default function CruiserCard({ data, index } : {data: ICruiser, index: number}) {
   return (
     <div className='flex flex-col mb-12 rounded-xl shadow-lg overflow-hidden cursor-pointer w-full md:flex-row md:min-h-45'>
       <div className={`w-full h-54 md:w-48 lg:w-96 relative md:h-54 ${!data.ship.image && 'bg-darkerGray'}`}>
@@ -14,8 +14,8 @@ export default function Cruiser({ data, index } : {data: ICruiser, index: number
       <div className='flex flex-col justify-between w-full'>
         <div className='py-4 px-6 flex justify-between'>
           <div className='flex flex-col w-112 justify-between'>
-            <div className='text-xl font-semibold text-ellipsis whitespace-nowrap overflow-hidden capitalize'>
-              <span className=''>
+            <div className='text-2xl font-semibold text-ellipsis whitespace-nowrap overflow-hidden capitalize'>
+              <span>
                 {data.name}
               </span>
             </div>
@@ -36,13 +36,7 @@ export default function Cruiser({ data, index } : {data: ICruiser, index: number
                 </span>
               </div>
             </div>
-            <div className='mt-2 h-12 overflow-auto'>
-              {
-                data.itinerary.map(it => (
-                  <span key={`${index}-${it}`} className='flex-inline'>{it} <span className='text-blue'>&#8594;</span> </span>
-                ))
-              }
-            </div>
+            <Ports itinerary={data.itinerary} index={index}/>
           </div>
           <div className='relative w-30 h-12 flex flex-col'>
             <div className='flex justify-end'>
@@ -54,18 +48,7 @@ export default function Cruiser({ data, index } : {data: ICruiser, index: number
             <div className='text-xs text-gray text-right font-semibold mt-1'>{data.ship.line.name}</div>
           </div>
         </div>
-
-        <div className='bg-tertiary w-full h-16 flex justify-end items-center px-4'>
-          <div className='flex flex-col mr-4'>
-            <span className='text-xs text-gray font-semibold'>Interior from</span>
-            <div className='flex justify-end font-semibold text-lg'>
-              <span className='text-xs self-start mt-1'>$</span>{data.price}
-            </div>
-          </div>
-          <Button>
-            See sailings
-          </Button>
-        </div>
+        <Footer price={data.price}/>
       </div>
     </div>
   )

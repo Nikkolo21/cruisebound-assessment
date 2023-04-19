@@ -1,4 +1,4 @@
-import { ICruiser } from "./page";
+import { ICruiser } from "@/app/utils/type";
 
 export const dropdownValues: {
   id: number;
@@ -91,4 +91,30 @@ export function sortCruiserList({
   });
 
   return chunkArray(sortedCruisers, 10);
+}
+
+export function filterCruiserList(
+  filter: 'port' | 'cruiseline',
+  value: string,
+  cruisers: ICruiser[],
+) {
+  if (filter === 'port') {
+    const filteredCruisers = cruisers.filter(cruiser =>
+      cruiser?.itinerary?.[0]?.toLowerCase().includes(value.toLocaleLowerCase())
+    );
+
+    return {
+      filteredCruisers,
+      paginatedCruisers: chunkArray(filteredCruisers, 10),
+    }
+  }
+
+  const filteredCruisers = cruisers.filter(cruiser =>
+    cruiser.ship.line.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+  );
+
+  return {
+    filteredCruisers,
+    paginatedCruisers: chunkArray(filteredCruisers, 10),
+  };
 }

@@ -1,6 +1,6 @@
 'use client';
-import { dropdownValues } from '@/app/(cruisers)/utils';
 import React, { useEffect, useRef, useState } from 'react';
+import { dropdownValues } from '@/app/utils';
 
 export default function Dropdown({ onChange }: { onChange: Function }) {
   const ref = useRef<any>(null);
@@ -28,9 +28,9 @@ export default function Dropdown({ onChange }: { onChange: Function }) {
 
   return (
     <div className='relative cursor-pointer' ref={ref}>
-      <button className='border border border-gray w-[145px] rounded-md' onClick={() => setIsOpen(true)}>
+      <button className='border border border-gray w-[140px] rounded-md' onClick={() => setIsOpen(true)}>
         {
-          <div className='flex flex-col px-4 py-2 w-full text-ellipsis whitespace-nowrap overflow-hidden font-semibold'>
+          <div className='flex flex-col px-3 pt-1 pb-2 w-full text-ellipsis whitespace-nowrap overflow-hidden font-semibold'>
             <div className='text-left'>
               {dropdownValues[selectedValue].name}
             </div>
@@ -42,7 +42,7 @@ export default function Dropdown({ onChange }: { onChange: Function }) {
       </button>
       {
         isOpen && (
-          <div className='absolute top-16 bg-white w-max z-10'>
+          <div className='absolute top-14 bg-white w-max z-10 shadow-lg'>
             {
               dropdownValues.map(elem => (
                 <div

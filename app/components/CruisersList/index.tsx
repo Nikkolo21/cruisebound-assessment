@@ -1,0 +1,48 @@
+'use client';
+import React, { useEffect, useState } from 'react';
+import { ICruiser, ICruisersStore, IListedCruisers } from '@/app/utils/type';
+import { useCruiserStore } from '@/app/store/cruisersStore';
+import { sortCruiserList } from '@/app/utils';
+import Pagination from '../Pagination';
+import Dropdown from '../Dropdown';
+import CruiserCard from '../CruiserCard';
+
+export default function CruisersList({ cruisers }: { cruisers: IListedCruisers }) {
+  const [page, setPage] = useState(0);
+  const [option, setOption] = useState(0);
+  const setInitialCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setInitialCruisers);
+  const setLocalCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setCruisers);
+  const localCruisers: ICruiser[] = useCruiserStore((state: ICruisersStore) => state.cruisers);
+  const localDividedCruisers: ICruiser[][] = useCruiserStore((state: ICruisersStore) => state.dividedCruisers);
+  const setLocalDividedCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setDividedCruisers);
+
+  useEffect(() => {
+    setLocalDividedCruisers(cruisers.dividedCruisers);
+    setLocalCruisers(cruisers.allCruisers);
+    setInitialCruisers(cruisers.allCruisers);
+  }, [setInitialCruisers, setLocalCruisers, setLocalDividedCruisers, cruisers.allCruisers, cruisers.dividedCruisers]);
+
+  useEffect(() => {
+    setPage(0);
+    setLocalDividedCruisers(
+      sortCruiserList({cruisers: localCruisers, option})
+    );
+  }, [option, setLocalDividedCruisers, localCruisers]);
+
+  return (
+    <div className='max-w-4xl w-full py-12'>
+      <div className='flex justify-between mb-12'>
+        <div></div>
+        <Dropdown onChange={(value: any) => setOption(value)} />
+      </div>
+      <div>
+        {
+          localDividedCruisers[page]?.map((
+          cruiser: ICruiser, index: number) =>
+            <CruiserCard key={`${index}-${cruiser.name}`} index={index} data={cruiser}/>
+        )}
+      </div>
+      <Pagination onClick={setPage} page={page} cruisers={localDividedCruisers} />
+    </div>
+  )
+}
