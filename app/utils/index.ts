@@ -94,23 +94,13 @@ export function sortCruiserList({
 }
 
 export function filterCruiserList(
-  filter: 'port' | 'cruiseline',
-  value: string,
+  port: string,
+  cruiseline: string,
   cruisers: ICruiser[],
 ) {
-  if (filter === 'port') {
-    const filteredCruisers = cruisers.filter(cruiser =>
-      cruiser?.itinerary?.[0]?.toLowerCase().includes(value.toLocaleLowerCase())
-    );
-
-    return {
-      filteredCruisers,
-      paginatedCruisers: chunkArray(filteredCruisers, 10),
-    }
-  }
-
   const filteredCruisers = cruisers.filter(cruiser =>
-    cruiser.ship.line.name.toLocaleLowerCase().includes(value.toLocaleLowerCase())
+    cruiser?.itinerary?.[0]?.toLowerCase().includes(port.toLocaleLowerCase()) &&
+    cruiser.ship.line.name.toLocaleLowerCase().includes(cruiseline.toLocaleLowerCase())
   );
 
   return {

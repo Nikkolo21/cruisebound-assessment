@@ -17,40 +17,29 @@ export default function AsideMenu() {
   const setLocalPaginatedCruisers: Function = useCruiserStore((state: ICruisersStore) => state.setDividedCruisers);
   const setIsFiltered: Function = useCruiserStore((state: ICruisersStore) => state.setIsFiltered);
 
-  const getCruisers = useCallback((filter: 'port' | 'cruiseline', value: string) => {
-    const result = filterCruiserList(filter, value, initialCruisers);
+  const getCruisers = useCallback(() => {
+    const result = filterCruiserList(port, cruiseline, initialCruisers);
     setLocalCruisers(result.filteredCruisers);
     setLocalPaginatedCruisers(result.paginatedCruisers);
-  }, [initialCruisers, setLocalCruisers, setLocalPaginatedCruisers]);
+  }, [initialCruisers, setLocalCruisers, setLocalPaginatedCruisers, port, cruiseline]);
 
   useEffect(() => {
     let timer = setTimeout(() => {
-      if(port.length > 0) {
-        getCruisers("port", port);
-        setIsFiltered(true);
-      }
+      getCruisers();
+      setIsFiltered(true);
     }, 500);
 
     return () => clearTimeout(timer);
-  }, [port, getCruisers, setIsFiltered])
-  
-  useEffect(() => {
-    let timer = setTimeout(() => {
-      if(cruiseline.length > 0) {
-        getCruisers("cruiseline", cruiseline);
-        setIsFiltered(true);
-      }
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [cruiseline, getCruisers, setIsFiltered])
+  }, [getCruisers, setIsFiltered])
 
   const handlePort = (e: any) => {
     setPort(e.target.value);
+    getCruisers();
   }
 
   const handleCruiseline = (e: any) => {
     setCruiseline(e.target.value);
+    getCruisers();
   }
 
   return (
