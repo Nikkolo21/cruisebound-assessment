@@ -43,7 +43,7 @@ export default function AsideMenu() {
   }
 
   return (
-    <div className='h-[100vh] relative w-1/6 sm:w-1/4 md:w-3/12 sticky top-0 left-0'>
+    <div className='hidden md:block h-[100vh] relative w-1/6 sm:w-1/4 md:w-3/12 sticky top-0 left-0'>
       <div className='flex flex-col justify-between h-full bg-secondary py-8 px-6'>
         <div>
           <div className='flex justify-end'>
